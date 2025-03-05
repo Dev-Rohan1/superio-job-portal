@@ -22,7 +22,7 @@ mongoose
   .catch((error) => console.log(error));
 
 // Define a valid API route
-app.use("/api/v1/", router);
+app.use("/", router);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
