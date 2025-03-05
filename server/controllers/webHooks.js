@@ -23,7 +23,7 @@ const clerkWebHooks = async (req, res) => {
           resume: "",
         };
 
-        await userModel.create(userData);
+        await userModel.save();
         res.json({});
         break;
       }
