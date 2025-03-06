@@ -31,7 +31,7 @@ const clerkWebHooks = async (req, res) => {
       case "user.updated": {
         const userData = {
           email: data.email_addresses[0].email_address, // Fixed email access
-          name: `${data.first_name} ${data.last_name}`,
+          name: data.fullName,
           image: data.image_url,
         };
 

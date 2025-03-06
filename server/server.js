@@ -17,7 +17,7 @@ app.use(express.json()); // Replaces bodyParser.json()
 app.use(cookieParser());
 
 mongoose
-  .connect(process.env.DATABASE_CONNECTION_URL)
+  .connect(`${process.env.DATABASE_CONNECTION_URL}/job-portal`)
   .then(() => console.log("database connection successfull"))
   .catch((error) => console.log(error));
 
