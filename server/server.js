@@ -6,6 +6,7 @@ import mongoose, { mongo } from "mongoose";
 import router from "./routes/api.js";
 import companyRouter from "./routes/companyRouter.js";
 import { v2 as cloudinary } from "cloudinary";
+import jobRoute from "./routes/jobRoute.js";
 
 // Initialize the express server
 const app = express();
@@ -32,6 +33,7 @@ cloudinary.config({
 // Define a valid API route
 app.use("/", router);
 app.use("/", companyRouter);
+app.use("/", jobRoute);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
