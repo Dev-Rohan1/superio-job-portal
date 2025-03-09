@@ -2,21 +2,17 @@ import { Webhook } from "svix";
 import User from "../model/user.js";
 
 const clerkWebhook = async (req, res) => {
-  const webhook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
-
   try {
+    const webhook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
+
     await webhook.verify(JSON.stringify(req.body), {
       "svix-id": req.headers["svix-id"],
-      "svix-signature": req.headers["svix-signature"],
       "svix-timestamp": req.headers["svix-timestamp"],
+      "svix-signature": req.headers["svix-signature"],
     });
-  } catch (error) {
-    return res.status(400).json({ error: "Webhook verification failed" });
-  }
 
-  const { data, type } = req.body;
+    const { data, type } = req.body;
 
-  try {
     switch (type) {
       case User.created: {
         const userData = {
