@@ -6,6 +6,8 @@ import mongoose from "mongoose";
 
 import { v2 as cloudinary } from "cloudinary";
 
+import webhook from "./src/controller/webHook.js";
+
 // Initialize the express server
 const app = express();
 
@@ -32,6 +34,7 @@ cloudinary.config({
 app.get("/", (req, res) => {
   res.send("Api Working");
 });
+app.post("/webhooks", webhook);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
