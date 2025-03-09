@@ -5,8 +5,7 @@ const clerkWebhook = async (req, res) => {
   const webhook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
 
   try {
-    const payload = JSON.stringify(req.body);
-    await webhook.verify(payload, {
+    await webhook.verify(JSON.stringify(req.body), {
       "svix-id": req.headers["svix-id"],
       "svix-signature": req.headers["svix-signature"],
       "svix-timestamp": req.headers["svix-timestamp"],
@@ -19,7 +18,7 @@ const clerkWebhook = async (req, res) => {
 
   try {
     switch (type) {
-      case "User.created": {
+      case User.created: {
         const userData = {
           _id: data.id,
           name: `${data.first_name} ${data.last_name}`,
@@ -32,7 +31,7 @@ const clerkWebhook = async (req, res) => {
         return res.status(201).json({ message: "User created" });
       }
 
-      case "User.updated": {
+      case User.updated: {
         const userData = {
           name: `${data.first_name} ${data.last_name}`,
           email: data.email_addresses[0]?.email_address || "",
@@ -45,7 +44,7 @@ const clerkWebhook = async (req, res) => {
         return res.status(200).json({ message: "User updated" });
       }
 
-      case "user.deleted": {
+      case User.deleted: {
         await User.findByIdAndDelete(data.id);
         return res.status(200).json({ message: "User deleted" });
       }
