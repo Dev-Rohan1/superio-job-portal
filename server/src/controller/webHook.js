@@ -14,39 +14,43 @@ const clerkWebhook = async (req, res) => {
     const { data, type } = req.body;
 
     switch (type) {
-      case User.created: {
+      case "user.created": {
         const userData = {
           _id: data.id,
-          name: `${data.first_name} ${data.last_name}`,
           email: data.email_addresses[0]?.email_address || "",
-          resume: "",
+          name: `${data.first_name} ${data.last_name}`,
           image: data.image_url,
+          resume: "",
         };
 
         await User.save(userData);
-        return res.status(201).json({ message: "User created" });
+        return res.json({});
+
+        break;
       }
 
-      case User.updated: {
+      case "user.updated": {
         const userData = {
-          name: `${data.first_name} ${data.last_name}`,
           email: data.email_addresses[0]?.email_address || "",
+          name: `${data.first_name} ${data.last_name}`,
           image: data.image_url,
         };
 
-        console.log(userData);
-
         await User.findByIdAndUpdate(data.id, userData);
-        return res.status(200).json({ message: "User updated" });
+
+        return res.json({});
+
+        break;
       }
 
-      case User.deleted: {
+      case "user.deleted": {
         await User.findByIdAndDelete(data.id);
-        return res.status(200).json({ message: "User deleted" });
+        return res.json({});
+        break;
       }
 
       default:
-        return res.status(400).json({ error: "Unhandled event type" });
+        return res.json({});
     }
   } catch (err) {
     return res
