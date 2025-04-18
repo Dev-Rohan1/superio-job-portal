@@ -18,7 +18,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="">
+    <header className="border-b border-gray-200 mb-10">
       <nav className="h-[70px] relative flex items-center justify-between ">
         {/* Logo */}
         <Link to="/" className="flex items-center">
