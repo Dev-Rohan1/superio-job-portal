@@ -1,7 +1,13 @@
 import React from "react";
+import Navbar from "../components/Navbar";
 
 const Terms = () => {
-  return <div>Terms</div>;
+  return (
+    <>
+      <Navbar />
+      <div>Terms</div>
+    </>
+  );
 };
 
 export default Terms;

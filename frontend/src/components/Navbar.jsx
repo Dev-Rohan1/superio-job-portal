@@ -1,47 +1,45 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import logo from "../assets/logo.svg";
-import { Button } from "./ui/button";
-import { Menu, X } from "lucide-react";
-import { Dialog } from "./ui/dialog";
+import { assets } from "../assets/assets";
+import { Menu, X } from "lucide-react"; // Added X icon for better close button
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const menu = [
-    { name: "Home", to: "/" },
-    { name: "Find Jobs", to: "/find-jobs" },
-    { name: "About", to: "/about" },
-    { name: "Terms", to: "/terms" },
-    { name: "FAQ", to: "/faq" },
+    { name: "Home", path: "/" },
+    { name: "All Jobs", path: "/all-jobs/all" },
+    { name: "About", path: "/about" },
+    { name: "Terms", path: "/terms" },
   ];
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-    <Dialog />;
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
-    <header className="relative border-b">
-      <nav className="flex items-center justify-between py-4">
-        <div className="flex items-center">
-          <Link to={"/"} className="flex items-center">
-            <img
-              className="w-[120px] md:w-auto"
-              src={logo}
-              alt="Company Logo"
-            />
-          </Link>
-        </div>
+    <header className="">
+      <nav className="h-[70px] relative flex items-center justify-between ">
+        {/* Logo */}
+        <Link to="/" className="flex items-center">
+          <img
+            className="w-[120px] md:w-[140px]"
+            src={assets.logo}
+            alt="Lecruiter Logo"
+          />
+        </Link>
 
-        {/* Desktop Navigation */}
-        <ul className="hidden lg:flex items-center gap-6 lg:gap-10">
-          {menu.map((item, index) => (
-            <li key={index}>
+        {/* Desktop Nav */}
+        <ul className="text-gray-700 hidden lg:flex items-center gap-8">
+          {menu.map((item) => (
+            <li key={item.path}>
               <NavLink
-                to={item.to}
+                to={item.path}
                 className={({ isActive }) =>
-                  `text-gray-700 transition-colors hover:text-blue-600 ${
-                    isActive ? "text-blue-600 font-medium" : ""
+                  `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    isActive
+                      ? "text-blue-600 bg-blue-50"
+                      : "text-gray-600 hover:text-blue-500 hover:bg-blue-50"
                   }`
                 }
               >
@@ -51,107 +49,91 @@ const Navbar = () => {
           ))}
         </ul>
 
-        <div className="hidden lg:flex gap-2">
-          <Link to={"/candidate-login"}>
-            <Button
-              className="rounded cursor-pointer text-gray-700 hover:bg-gray-100"
-              variant="ghost"
-            >
-              Recruiter Login
-            </Button>
-          </Link>
-          <Link to={"/candidate-signup"}>
-            <Button
-              variant="outline"
-              className="rounded cursor-pointer text-gray-700 border-gray-300 hover:border-gray-400"
-            >
-              Login
-            </Button>
-          </Link>
+        {/* Desktop Buttons */}
+        <div className="hidden lg:flex items-center gap-3">
+          <button className="bg-blue-50 text-blue-600 px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-100 transition-colors cursor-pointer">
+            Lecruiter Login
+          </button>
+          <button className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors cursor-pointer">
+            Login
+          </button>
         </div>
 
-        {/* Mobile Menu Button - Only shown on mobile */}
+        {/* Mobile Menu Button */}
         <button
-          className="cursor-pointer lg:hidden text-gray-600 ml-2"
-          onClick={toggleMenu}
           aria-label="Toggle menu"
+          aria-expanded={isMobileMenuOpen}
+          type="button"
+          onClick={toggleMenu}
+          className="lg:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
         >
-          {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          <Menu size={20} />
         </button>
 
-        {/* Mobile Menu Overlay and Sidebar */}
+        {/* Slide-in Mobile Menu */}
         <div
-          className={`fixed inset-0 z-50 transition-all duration-300 ease-in-out ${
-            isMenuOpen ? "visible" : "invisible"
-          }`}
-          onClick={toggleMenu}
+          className={`fixed top-0 left-0 h-full w-64 bg-white p-6 z-40 transform transition-transform duration-300 ease-in-out shadow-sm border-r border-r-gray-200 ${
+            isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+          } lg:hidden`}
         >
-          {/* Overlay */}
-          <div
-            className={`absolute inset-0 bg-black transition-opacity duration-300 ${
-              isMenuOpen ? "opacity-50" : "opacity-0"
-            }`}
-          ></div>
+          {/* Mobile Menu Header */}
+          <div className="flex items-center justify-between mb-8">
+            <img className="h-9" src={assets.logo} alt="Lecruiter Logo" />
+            <button
+              onClick={toggleMenu}
+              className="p-2 rounded-md text-gray-500 hover:bg-gray-100 cursor-pointer"
+              aria-label="Close menu"
+            >
+              <X size={20} />
+            </button>
+          </div>
 
-          {/* Sidebar */}
-          <div
-            className={`absolute top-0 right-0 h-full w-64 bg-white shadow-xl transform transition-transform duration-300 ${
-              isMenuOpen ? "translate-x-0" : "translate-x-full"
-            }`}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex flex-col h-full p-4">
-              <div className="flex justify-between items-center mb-8">
-                <Link
-                  to={"/"}
-                  className="flex items-center"
+          {/* Navigation Links */}
+          <ul className="flex flex-col space-y-2">
+            {menu.map((item) => (
+              <li key={item.path}>
+                <NavLink
+                  to={item.path}
                   onClick={toggleMenu}
+                  className={({ isActive }) =>
+                    `block px-3 py-2 rounded-md text-base font-medium ${
+                      isActive
+                        ? "bg-blue-50 text-blue-600"
+                        : "text-gray-700 hover:bg-gray-100"
+                    }`
+                  }
                 >
-                  <img className="w-[120px]" src={logo} alt="Company Logo" />
-                </Link>
-                <button
-                  className="text-gray-500 hover:text-gray-700 focus:outline-none"
-                  onClick={toggleMenu}
-                >
-                  <X size={22} />
-                </button>
-              </div>
+                  {item.name}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
 
-              <ul className="flex-1">
-                {menu.map((item, index) => (
-                  <li key={index} className="mb-2">
-                    <NavLink
-                      to={item.to}
-                      className={({ isActive }) =>
-                        `block px-4 py-3 rounded-lg text-gray-700 transition-colors hover:bg-gray-100 ${
-                          isActive ? "bg-blue-50 text-blue-600 font-medium" : ""
-                        }`
-                      }
-                      onClick={toggleMenu}
-                    >
-                      {item.name}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-auto pt-4 border-t border-gray-200">
-                <Button
-                  className="w-full mb-2 rounded-lg cursor-pointer hover:bg-gray-100"
-                  variant="ghost"
-                >
-                  Recruiter Login
-                </Button>
-                <Button
-                  variant="outline"
-                  className="w-full rounded-lg cursor-pointer text-gray-700 border-gray-300 hover:border-gray-400"
-                >
-                  Login
-                </Button>
-              </div>
-            </div>
+          {/* CTA Buttons */}
+          <div className="mt-8 space-y-3">
+            <button
+              type="button"
+              className="w-full bg-blue-50 text-blue-600 px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-100 transition-colors cursor-pointer"
+            >
+              Lecruiter Login
+            </button>
+            <button
+              type="button"
+              className="w-full bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors cursor-pointer"
+            >
+              Login
+            </button>
           </div>
         </div>
+
+        {/* Overlay */}
+        {isMobileMenuOpen && (
+          <div
+            onClick={toggleMenu}
+            className="fixed inset-0  backdrop-blur-sm z-30 lg:hidden"
+            aria-hidden="true"
+          />
+        )}
       </nav>
     </header>
   );
