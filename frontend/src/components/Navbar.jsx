@@ -78,7 +78,9 @@ const Navbar = () => {
         >
           {/* Mobile Menu Header */}
           <div className="flex items-center justify-between mb-8">
-            <img className="h-9" src={assets.logo} alt="Lecruiter Logo" />
+            <Link to={"/"}>
+              <img className="h-9" src={assets.logo} alt="Lecruiter Logo" />
+            </Link>
             <button
               onClick={toggleMenu}
               className="p-2 rounded-md text-gray-500 hover:bg-gray-100 cursor-pointer"
