@@ -39,7 +39,7 @@ const Download = () => {
         </div>
 
         {/* App Image */}
-        <div className="w-full lg:w-[45%] flex justify-center">
+        <div className="w-full lg:w-[45%] mt-10 lg:mt-0 flex justify-center">
           <img
             src={assets.download_image}
             alt="Superio App Preview"
