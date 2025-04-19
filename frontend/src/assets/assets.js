@@ -8,6 +8,7 @@ import back_arrow_icon from "./back_arrow_icon.svg";
 import marketing from "./bullhorn.png";
 import programming from "./code.png";
 import company_icon from "./company.webp";
+import counter_image from "./counter.webp";
 import cross_icon from "./cross_icon.svg";
 import cyber_security from "./cyber-security.png";
 import delete_icon from "./delete_icon.svg";
@@ -77,6 +78,7 @@ export const assets = {
   samsung_logo,
   adobe_logo,
   amazon_logo,
+  counter_image,
 };
 
 export const categoryIcon = [
@@ -123,7 +125,7 @@ export const testimonials = [
     title: "Highly Recommended",
     description:
       "I found the perfect job within a week. The interface is clean and the support team is super responsive. Couldn't ask for more!",
-    image: "https://placehold.co/200x200/2563eb/white?text=DT", // Daniel Thompson initials
+    image: "https://randomuser.me/api/portraits/men/32.jpg", // Daniel Thompson photo
     name: "Daniel Thompson",
     position: "Digital Marketing Manager",
   },
@@ -139,7 +141,7 @@ export const testimonials = [
     title: "A Game-Changer for Job Seekers",
     description:
       "I've used many job portals before, but this one stands out with its simplicity and effectiveness. Found a great opportunity here!",
-    image: "https://placehold.co/200x200/2563eb/white?text=KB", // Kevin Brooks initials
+    image: "https://randomuser.me/api/portraits/men/75.jpg", // Kevin Brooks photo
     name: "Kevin Brooks",
     position: "Software Engineer",
   },

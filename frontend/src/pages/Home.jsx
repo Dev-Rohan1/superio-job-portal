@@ -4,6 +4,7 @@ import Hero from "../components/Hero";
 import JobCategoryt from "../components/JobCategory";
 import Navbar from "../components/Navbar";
 import Testimonials from "../components/Testimonials";
+import Counter from "../components/Counter";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <JobCategoryt />
       <FeaturedJob />
       <Testimonials />
+      <Counter />
     </>
   );
 };
