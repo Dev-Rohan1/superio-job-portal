@@ -63,7 +63,7 @@ const Counter = () => {
             <CountUp start={0} end={4} duration={3} enableScrollSpy={true} />
             <span>M</span>
           </div>
-          <span className="text-gray-600 text-lg">
+          <span className="text-gray-600">
             4 million daily active users
           </span>
         </div>
@@ -72,7 +72,7 @@ const Counter = () => {
             <CountUp start={0} end={12} duration={3} enableScrollSpy={true} />
             <span>K</span>
           </div>
-          <span className="text-gray-600 text-lg">
+          <span className="text-gray-600">
             Over 12k open job positions
           </span>
         </div>
@@ -81,7 +81,7 @@ const Counter = () => {
             <CountUp start={0} end={20} duration={3} enableScrollSpy={true} />
             <span>M</span>
           </div>
-          <span className="text-gray-600 text-lg">
+          <span className="text-gray-600">
             Over 20 million stories shared
           </span>
         </div>

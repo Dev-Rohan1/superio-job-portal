@@ -5,6 +5,8 @@ import JobCategoryt from "../components/JobCategory";
 import Navbar from "../components/Navbar";
 import Testimonials from "../components/Testimonials";
 import Counter from "../components/Counter";
+import Download from "../components/Download";
+import Footer from "../components/Footer";
 
 const Home = () => {
   return (
@@ -15,6 +17,8 @@ const Home = () => {
       <FeaturedJob />
       <Testimonials />
       <Counter />
+      <Download />
+      <Footer />
     </>
   );
 };

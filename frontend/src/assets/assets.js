@@ -12,6 +12,7 @@ import counter_image from "./counter.webp";
 import cross_icon from "./cross_icon.svg";
 import cyber_security from "./cyber-security.png";
 import delete_icon from "./delete_icon.svg";
+import download_image from "./downlaod.webp";
 import email_icon from "./email_icon.svg";
 import facebook_icon from "./facebook_icon.svg";
 import network from "./global-connection.png";
@@ -79,6 +80,7 @@ export const assets = {
   adobe_logo,
   amazon_logo,
   counter_image,
+  download_image,
 };
 
 export const categoryIcon = [
