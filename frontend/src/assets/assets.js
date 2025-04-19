@@ -42,6 +42,9 @@ import twitter_icon from "./twitter_icon.svg";
 import upload_area from "./upload_area.svg";
 import walmart_logo from "./walmart_logo.svg";
 import designing from "./web-design.png";
+import work_1 from "./work-1.webp";
+import work_2 from "./work-2.webp";
+import work_3 from "./work-3.webp";
 
 export const assets = {
   logo,
@@ -81,6 +84,9 @@ export const assets = {
   amazon_logo,
   counter_image,
   download_image,
+  work_1,
+  work_2,
+  work_3,
 };
 
 export const categoryIcon = [

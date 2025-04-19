@@ -8,7 +8,7 @@ import { testimonials } from "../assets/assets";
 
 const Testimonials = () => {
   return (
-    <section className="mt-28">
+    <section className="mt-28 mb-28">
       <div className="text-center mb-12">
         <h2 className="text-3xl font-bold text-gray-700 mb-2">
           {" "}

@@ -5,7 +5,7 @@ import CountUp from "react-countup";
 
 const Counter = () => {
   return (
-    <section className="mt-28">
+    <section>
       {/* Main Content Section */}
       <div className="flex flex-col lg:flex-row justify-between items-stretch gap-8 mb-6">
         {/* Image Container */}
@@ -63,27 +63,21 @@ const Counter = () => {
             <CountUp start={0} end={4} duration={3} enableScrollSpy={true} />
             <span>M</span>
           </div>
-          <span className="text-gray-600">
-            4 million daily active users
-          </span>
+          <span className="text-gray-600">4 million daily active users</span>
         </div>
         <div className="text-center p-4">
           <div className="text-4xl font-bold text-blue-600 mb-2">
             <CountUp start={0} end={12} duration={3} enableScrollSpy={true} />
             <span>K</span>
           </div>
-          <span className="text-gray-600">
-            Over 12k open job positions
-          </span>
+          <span className="text-gray-600">Over 12k open job positions</span>
         </div>
         <div className="text-center p-4">
           <div className="text-4xl font-bold text-blue-600 mb-2">
             <CountUp start={0} end={20} duration={3} enableScrollSpy={true} />
             <span>M</span>
           </div>
-          <span className="text-gray-600">
-            Over 20 million stories shared
-          </span>
+          <span className="text-gray-600">Over 20 million stories shared</span>
         </div>
       </div>
     </section>
