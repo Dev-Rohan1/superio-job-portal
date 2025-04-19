@@ -5,12 +5,18 @@ import { useParams } from "react-router-dom";
 function AllJobs() {
   const { category } = useParams();
 
-  console.log(category);
+  
 
+  
   return (
     <>
       <Navbar />
-      <div>AllJobs</div>
+      <section>
+        <div>
+          <div></div>
+          <div></div>
+        </div>
+      </section>
     </>
   );
 }
