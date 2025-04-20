@@ -1,8 +1,11 @@
 import React, { useContext, useRef } from "react";
 import { Search, MapPin } from "lucide-react";
 import { AppContext } from "../context/AppContext";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   const titleRef = useRef(null);
   const locationRef = useRef(null);
 
@@ -17,6 +20,8 @@ const Hero = () => {
     });
 
     setIsSearched(true);
+
+    navigate("/all-jobs/all");
   };
 
   return (

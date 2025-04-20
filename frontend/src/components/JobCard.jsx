@@ -1,0 +1,52 @@
+import React from "react";
+import moment from "moment";
+import kConverter from "k-convert";
+import { assets } from "../assets/assets";
+import { MapPin, Clock } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
+const JobCard = ({ job }) => {
+  const navigate = useNavigate();
+
+  return (
+    <div
+      onClick={() => navigate(`/apply-job/${job._id}`)}
+      key={job._id}
+      className="flex gap-4 rounded-lg border border-gray-200 p-5 hover:shadow transition cursor-pointer"
+    >
+      <img
+        className="w-[60px] h-[60px] object-contain"
+        src={job.companyId?.logo || assets.company_icon}
+        alt={`${job.companyId?.name || "Company"} Logo`}
+      />
+      <div className="flex-1">
+        <h1 className="text-xl text-gray-700 font-semibold mb-1">
+          {job.title}
+        </h1>
+        <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mt-3">
+          <div className="flex items-center gap-2">
+            <img src={assets.suitcase_icon} alt="Company" className="w-4 h-4" />
+            <span>{job.companyId?.name || "Unknown Company"}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <MapPin size={16} />
+            <span>{job.location}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Clock size={16} />
+            <span>{moment(job.date).fromNow()}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <img src={assets.money_icon} alt="Salary" className="w-4 h-4" />
+            <span>
+              CTC:{" "}
+              {job.salary ? kConverter.convertTo(job.salary) : "Not disclosed"}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default JobCard;
