@@ -138,10 +138,9 @@ function AllJobs() {
   };
 
   const totalPages = Math.ceil(filteredJobs.length / jobsPerPage);
-  const paginatedJobs = filteredJobs.slice(
-    (currentPage - 1) * jobsPerPage,
-    currentPage * jobsPerPage
-  );
+  const paginatedJobs = filteredJobs
+    .reverse()
+    .slice((currentPage - 1) * jobsPerPage, currentPage * jobsPerPage);
 
   return (
     <>
@@ -252,7 +251,7 @@ function AllJobs() {
             <div className="mb-6">
               <h1 className="text-2xl font-bold text-gray-700 mb-2 capitalize">
                 {category === "all"
-                  ? "Latest Jobs"
+                  ? "Latest All Jobs"
                   : `Jobs in ${
                       category.charAt(0).toUpperCase() + category.slice(1)
                     }`}
@@ -274,7 +273,7 @@ function AllJobs() {
                   <JobCard key={index} job={job} />
                 ))
               ) : (
-                <div className="text-center bg-white p-6 border border-gray-200 rounded-md shadow-sm">
+                <div className="text-center bg-white p-6 border border-gray-200 rounded-md">
                   <h3 className="text-lg font-semibold text-gray-800 mb-1">
                     No jobs found
                   </h3>

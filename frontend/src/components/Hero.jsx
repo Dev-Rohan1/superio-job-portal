@@ -21,7 +21,9 @@ const Hero = () => {
 
     setIsSearched(true);
 
-    navigate("/all-jobs/all");
+    if (titleRef.current.value || locationRef.current.value) {
+      navigate("/all-jobs/all");
+    }
   };
 
   return (
