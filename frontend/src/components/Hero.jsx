@@ -30,13 +30,13 @@ const Hero = () => {
     <section className="bg-gradient-to-r from-blue-50 to-indigo-100 rounded-lg py-16 px-6 md:px-20">
       <div className="text-center max-w-2xl mx-auto">
         {/* Heading */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4 leading-tight sm:leading-snug">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-700 mb-4 leading-tight sm:leading-snug">
           There Are <span className="text-blue-700">93,178</span> Postings Here
           For You!
         </h1>
 
         {/* Subtext */}
-        <p className="text-gray-600 mb-10 sm:text-lg">
+        <p className="text-gray-600 mb-10">
           Your next big career move starts right here — explore the best job
           opportunities and take the first step toward your future!
         </p>
@@ -77,7 +77,7 @@ const Hero = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full sm:w-auto bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2.5 md:py-3.5 px-6 rounded-md transition text-sm"
+            className="w-full sm:w-auto bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2.5 md:py-3.5 px-6 rounded-md transition text-sm cursor-pointer"
           >
             Search
           </button>

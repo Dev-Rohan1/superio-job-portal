@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import kConverter from "k-convert";
 import { assets } from "../assets/assets";
-import { MapPin, Clock } from "lucide-react";
+import { MapPin, Clock, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const JobCard = ({ job }) => {
@@ -10,8 +10,11 @@ const JobCard = ({ job }) => {
 
   return (
     <div
-      onClick={() => navigate(`/apply-job/${job._id}`)}
       key={job._id}
+      onClick={() => {
+        navigate(`/apply-job/${job._id}`);
+        scrollTo(0, 0);
+      }}
       className="flex gap-4 rounded-lg border border-gray-200 p-5 hover:shadow transition cursor-pointer"
     >
       <img
@@ -23,21 +26,25 @@ const JobCard = ({ job }) => {
         <h1 className="text-xl text-gray-700 font-semibold mb-1">
           {job.title}
         </h1>
-        <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mt-3">
+        <div className="flex flex-wrap items-center gap-4 text-gray-600 mt-3">
           <div className="flex items-center gap-2">
-            <img src={assets.suitcase_icon} alt="Company" className="w-4 h-4" />
+            <img src={assets.suitcase_icon} alt="Company" />
             <span>{job.companyId?.name || "Unknown Company"}</span>
           </div>
           <div className="flex items-center gap-2">
-            <MapPin size={16} />
+            <User size={20} />
+            <span>{job.level}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <MapPin size={19} />
             <span>{job.location}</span>
           </div>
           <div className="flex items-center gap-2">
-            <Clock size={16} />
+            <Clock size={19} />
             <span>{moment(job.date).fromNow()}</span>
           </div>
           <div className="flex items-center gap-2">
-            <img src={assets.money_icon} alt="Salary" className="w-4 h-4" />
+            <img src={assets.money_icon} alt="Salary" />
             <span>
               CTC:{" "}
               {job.salary ? kConverter.convertTo(job.salary) : "Not disclosed"}
