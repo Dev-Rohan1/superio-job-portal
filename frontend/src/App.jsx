@@ -9,6 +9,8 @@ import CandidatesLogin from "./pages/CandidatesLogin";
 import CandidatesSignup from "./pages/CandidatesSignup";
 import Home from "./pages/Home";
 import Terms from "./pages/Terms";
+import RecruiterLogin from "./pages/RecruiterLogin";
+import RecruiterSignup from "./pages/RecruiterSignup";
 
 const App = () => {
   return (
@@ -22,6 +24,8 @@ const App = () => {
         <Route path="/applications" element={<Applications />} />
         <Route path="/candidate-login" element={<CandidatesLogin />} />
         <Route path="/candidate-signup" element={<CandidatesSignup />} />
+        <Route path="/recruiter-login" element={<RecruiterLogin />} />
+        <Route path="/recruiter-signup" element={<RecruiterSignup />} />
       </Routes>
     </AppLayout>
   );

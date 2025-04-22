@@ -51,7 +51,10 @@ const Navbar = () => {
 
         {/* Desktop Buttons */}
         <div className="hidden lg:flex items-center gap-3">
-          <Link className="bg-blue-50 text-blue-600 px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-100 transition-colors cursor-pointer">
+          <Link
+            to={"/recruiter-login"}
+            className="bg-blue-50 text-blue-600 px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-100 transition-colors cursor-pointer"
+          >
             Lecruiter Login
           </Link>
           <Link
