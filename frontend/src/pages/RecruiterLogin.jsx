@@ -8,7 +8,7 @@ const RecruiterLogin = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen flex flex-col">
+      <div className="flex-col">
         <main className="flex-grow flex items-center justify-center">
           <div className="w-full max-w-md border border-gray-200 rounded-lg p-6 bg-white">
             <div className="text-center mb-6">
