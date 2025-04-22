@@ -1,15 +1,15 @@
+import { Lock, Mail } from "lucide-react";
 import React from "react";
+import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { Mail, Lock } from "lucide-react";
-import { Link } from "react-router-dom";
 
 const RecruiterLogin = () => {
   return (
     <>
       <Navbar />
       <div className="min-h-screen flex flex-col">
-        <main className="flex-grow flex items-center justify-center px-4 py-8">
+        <main className="flex-grow flex items-center justify-center">
           <div className="w-full max-w-md border border-gray-200 rounded-lg p-6 bg-white">
             <div className="text-center mb-6">
               <h1 className="text-2xl font-semibold text-gray-700 mb-1">
@@ -40,7 +40,7 @@ const RecruiterLogin = () => {
               </div>
 
               <div className="flex items-center justify-between">
-                <label className="flex items-center space-x-2">
+                <label className="flex items-center space-x-2 cursor-pointer">
                   <input
                     type="checkbox"
                     className="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
@@ -50,7 +50,7 @@ const RecruiterLogin = () => {
               </div>
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer"
               >
                 Login
               </button>

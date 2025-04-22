@@ -9,7 +9,7 @@ const CandidatesLogin = () => {
     <>
       <Navbar />
       <div className="min-h-screen flex flex-col">
-        <main className="flex-grow flex items-center justify-center px-4 py-8">
+        <main className="flex-grow flex items-center justify-center">
           <div className="w-full max-w-md border border-gray-200 rounded-lg p-6 bg-white">
             <div className="text-center mb-6">
               <h1 className="text-2xl font-semibold text-gray-700 mb-1">
@@ -40,7 +40,7 @@ const CandidatesLogin = () => {
               </div>
 
               <div className="flex items-center justify-between">
-                <label className="flex items-center space-x-2">
+                <label className="flex items-center space-x-2 cursor-pointer">
                   <input
                     type="checkbox"
                     className="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"

@@ -22,8 +22,8 @@ const CandidatesSignup = () => {
     <>
       <Navbar />
       <div>
-        <main className="flex-grow flex items-center justify-center px-4 py-8 sm:py-12">
-          <div className="w-full max-w-md mx-4 border border-gray-200 rounded-lg p-6">
+        <main className="flex-grow flex items-center justify-center">
+          <div className="w-full max-w-md border border-gray-200 rounded-lg p-6">
             <div className="text-center mb-6">
               <h1 className="text-2xl font-semibold text-gray-700 mb-1">
                 Candidate Signup
@@ -92,23 +92,21 @@ const CandidatesSignup = () => {
                 </div>
               </div>
 
-              <div className="flex items-start">
+              <label
+                htmlFor="terms-checkbox"
+                className="flex items-center gap-1 cursor-pointer text-sm text-gray-600"
+              >
                 <input
                   id="terms-checkbox"
                   type="checkbox"
                   className="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 mt-0.5"
                   required
                 />
-                <label
-                  htmlFor="terms-checkbox"
-                  className="ml-2 block text-sm text-gray-600"
-                >
-                  I agree to the{" "}
-                  <Link to="/terms" className="text-blue-600 hover:underline">
-                    Terms and Conditions
-                  </Link>
-                </label>
-              </div>
+                I agree to the{" "}
+                <Link to="/terms" className="text-blue-600 hover:underline">
+                  Terms and Conditions
+                </Link>
+              </label>
 
               <button
                 type="submit"
