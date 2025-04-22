@@ -107,7 +107,7 @@ const ApplyJob = () => {
               className="job-description"
               dangerouslySetInnerHTML={{ __html: jobData.description }}
             ></div>
-            <button className="bg-blue-600 mt-6 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-md transition duration-200 shadow-sm hover:shadow-md cursor-pointer transform hover:-translate-y-0.5">
+            <button className="bg-blue-600 mt-6 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-md transition duration-200 shadow-sm hover:shadow-md cursor-pointer">
               Apply now
             </button>
           </div>
