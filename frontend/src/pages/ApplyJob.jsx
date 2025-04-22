@@ -7,6 +7,7 @@ import { assets } from "../assets/assets";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { AppContext } from "../context/AppContext";
+import JobCard from "../components/JobCard";
 
 const ApplyJob = () => {
   const [jobData, setJobData] = useState(null);
@@ -97,13 +98,40 @@ const ApplyJob = () => {
             </div>
           </div>
         </div>
-        <div>
-          <div>
-            <h1 className="text-2xl font-bold text-gray-700">
+        <div className="flex flex-col lg:flex-row gap-8">
+          <div className="w-full lg:w-1/2 xl:w-2/3">
+            <h1 className="text-2xl font-bold mb-6 text-gray-700">
               Job Description
             </h1>
+            <div
+              className="job-description"
+              dangerouslySetInnerHTML={{ __html: jobData.description }}
+            ></div>
+            <button className="bg-blue-600 mt-6 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-md transition duration-200 shadow-sm hover:shadow-md cursor-pointer transform hover:-translate-y-0.5">
+              Apply now
+            </button>
           </div>
-          <div></div>
+
+          <div className="w-full lg:w-1/2 xl:w-1/3">
+            <h2 className="text-xl font-semibold mb-4 text-gray-700">
+              Other Jobs at{" "}
+              <span className="text-blue-600">{jobData.companyId.name}</span>
+            </h2>
+            <div className="space-y-4">
+              {jobs
+                .filter(
+                  (job) =>
+                    job._id !== jobData._id &&
+                    job.companyId.name === jobData.companyId.name
+                )
+                .filter((job) => true)
+                .reverse()
+                .slice(0, 3)
+                .map((job, index) => (
+                  <JobCard job={job} key={index} />
+                ))}
+            </div>
+          </div>
         </div>
       </section>
       <Footer />
