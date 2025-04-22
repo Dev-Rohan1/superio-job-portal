@@ -119,18 +119,20 @@ const Navbar = () => {
 
           {/* CTA Buttons */}
           <div className="mt-8 space-y-3">
-            <button
+            <Link
+              to={"/recruiter-login"}
               type="button"
-              className="w-full bg-blue-50 text-blue-600 px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-100 transition-colors cursor-pointer"
+              className="w-full bg-blue-50 text-blue-600 px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-100 transition-colors cursor-pointer flex items-center justify-center"
             >
               Lecruiter Login
-            </button>
-            <button
+            </Link>
+            <Link
+              to="/candidate-login"
               type="button"
-              className="w-full bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors cursor-pointer"
+              className="w-full bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors cursor-pointer flex items-center justify-center"
             >
               Login
-            </button>
+            </Link>
           </div>
         </div>
 
