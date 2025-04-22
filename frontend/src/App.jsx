@@ -5,6 +5,8 @@ import About from "./pages/About";
 import AllJobs from "./pages/AllJobs";
 import Applications from "./pages/Applications";
 import ApplyJob from "./pages/ApplyJob";
+import CandidatesLogin from "./pages/CandidatesLogin";
+import CandidatesSignup from "./pages/CandidatesSignup";
 import Home from "./pages/Home";
 import Terms from "./pages/Terms";
 
@@ -18,6 +20,8 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/apply-job/:id" element={<ApplyJob />} />
         <Route path="/applications" element={<Applications />} />
+        <Route path="/candidate-login" element={<CandidatesLogin />} />
+        <Route path="/candidate-signup" element={<CandidatesSignup />} />
       </Routes>
     </AppLayout>
   );

@@ -1,7 +1,7 @@
+import { Menu, X } from "lucide-react"; // Added X icon for better close button
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { assets } from "../assets/assets";
-import { Menu, X } from "lucide-react"; // Added X icon for better close button
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -51,12 +51,15 @@ const Navbar = () => {
 
         {/* Desktop Buttons */}
         <div className="hidden lg:flex items-center gap-3">
-          <button className="bg-blue-50 text-blue-600 px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-100 transition-colors cursor-pointer">
+          <Link className="bg-blue-50 text-blue-600 px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-100 transition-colors cursor-pointer">
             Lecruiter Login
-          </button>
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors cursor-pointer">
+          </Link>
+          <Link
+            to="/candidate-login"
+            className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors cursor-pointer"
+          >
             Login
-          </button>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
