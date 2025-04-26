@@ -42,7 +42,12 @@ const FeaturedJob = () => {
               ))}
           </motion.div>
 
-          <div className="text-center mt-12">
+          <motion.div
+            variants={SlideUp(0.5)}
+            initial="hidden"
+            whileInView="visible"
+            className="text-center mt-12"
+          >
             <button
               onClick={() => {
                 navigate("/all-jobs/all");
@@ -52,7 +57,7 @@ const FeaturedJob = () => {
             >
               See more
             </button>
-          </div>
+          </motion.div>
         </>
       )}
     </section>
