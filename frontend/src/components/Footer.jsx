@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="flex flex-col sm:flex-row items-center gap-4">
           <Link to="/">
             <img
-              className="w-[120px] md:w-[140px] h-auto object-contain"
+              className="w-[120px] object-contain"
               src={assets.logo}
               alt="Company Logo"
             />

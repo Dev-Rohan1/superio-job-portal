@@ -68,7 +68,7 @@ const Applications = () => {
   return (
     <>
       <Navbar />
-      <section className="container mx-auto px-4 py-8">
+      <section>
         {/* Resume Section */}
         <div className="mb-10">
           <h1 className="text-lg font-medium mb-3">Your Resume</h1>
