@@ -1,7 +1,9 @@
+import axios from "axios";
 import kConverter from "k-convert";
 import { Clock, MapPin, User } from "lucide-react";
 import moment from "moment";
 import React, { useContext, useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import { assets } from "../assets/assets";
 import Footer from "../components/Footer";
@@ -9,8 +11,6 @@ import JobCard from "../components/JobCard";
 import Loader from "../components/Loader";
 import Navbar from "../components/Navbar";
 import { AppContext } from "../context/AppContext";
-import axios from "axios";
-import { toast } from "react-hot-toast";
 
 const ApplyJob = () => {
   const [jobData, setJobData] = useState(null);

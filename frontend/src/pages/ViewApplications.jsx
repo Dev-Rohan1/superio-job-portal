@@ -70,7 +70,7 @@ const ViewApplications = () => {
   }, []);
 
   return (
-    <section className="px-4 py-6 sm:px-6 lg:px-8">
+    <section>
       {isLoading ? (
         <div className="flex items-center justify-center h-[70vh]">
           <Loader />
