@@ -7,6 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
 dist
 dist-ssr
@@ -21,7 +22,12 @@ dist-ssr
 *.ntvs*
 *.njsproj
 *.sln
-*.sw?
 
 # Environment variables
 .env
+
+# Other files
+*.sw*
+
+# Local Netlify folder
+.netlify
