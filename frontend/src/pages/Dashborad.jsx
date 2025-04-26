@@ -1,5 +1,11 @@
 import { useContext, useEffect } from "react";
-import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext";
 import { LoaderCircle, LogOut } from "lucide-react";
@@ -7,6 +13,7 @@ import toast from "react-hot-toast";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const location = useLocation(); // ✅ Added this
 
   const { companyData, companyLoading } = useContext(AppContext);
 
@@ -42,23 +49,28 @@ const Dashboard = () => {
       location.pathname === "/dashboard" ||
       location.pathname === "/dashboard/"
     ) {
+      document.title = "Superio - Job Portal | Dashboard";
       navigate("/dashboard/manage-jobs");
     }
   }, [location.pathname, navigate]);
 
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="flex items-center justify-between border-b border-gray-200 py-3 bg-white sticky top-0 z-10">
+      <header className="flex items-center justify-between border-b border-gray-200 py-3 bg-white sticky top-0 z-10 px-4">
         <Link to="/dashboard" className="flex items-center">
           <img className="w-[120px]" src={assets.logo} alt="Lecruiter Logo" />
         </Link>
         {companyLoading ? (
-          <LoaderCircle />
+          <LoaderCircle className="animate-spin text-gray-500" />
         ) : companyData ? (
           <div className="flex items-center gap-4 md:gap-3">
             <div className="flex items-center gap-2">
               <p className="text-gray-600">Hi, {companyData?.name}</p>
-              <img className="w-8 h-8" src={companyData?.image} alt="image" />
+              <img
+                className="w-8 h-8 rounded-full object-cover"
+                src={companyData?.image}
+                alt={`${companyData?.name}'s profile`}
+              />
             </div>
             <button
               className="w-[30px] h-[30px] flex items-center justify-center rounded bg-gray-50 border border-gray-200 hover:bg-gray-100 transition-colors cursor-pointer"
@@ -68,9 +80,7 @@ const Dashboard = () => {
               <LogOut size={18} className="text-gray-700" />
             </button>
           </div>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </header>
 
       <div className="flex flex-1">
@@ -91,7 +101,7 @@ const Dashboard = () => {
               >
                 <img
                   src={item.icon}
-                  alt=""
+                  alt={`${item.name} icon`}
                   className="w-5 h-5"
                   aria-hidden="true"
                 />
@@ -101,7 +111,7 @@ const Dashboard = () => {
           </nav>
         </aside>
 
-        <main className="flex-1  overflow-auto pl-4 pt-4">
+        <main className="flex-1 overflow-auto pl-4 pt-4">
           <Outlet />
         </main>
       </div>

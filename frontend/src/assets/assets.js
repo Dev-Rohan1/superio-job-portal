@@ -211,6 +211,7 @@ export const JobLocations = [
   "Sylhet",
   "Rangpur",
   "Mymensingh",
+  "Remote",
 ];
 
 // Sample data for Manage Jobs Page

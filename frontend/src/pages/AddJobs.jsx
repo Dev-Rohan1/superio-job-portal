@@ -33,7 +33,7 @@ const AddJob = () => {
           category,
           location,
           level,
-          salary: Number(salary), // Ensure salary is a number
+          salary,
         },
         {
           headers: { token: companyToken },
@@ -49,7 +49,6 @@ const AddJob = () => {
         setLevel("Intermediate");
         setSalary(null);
 
-        // Reset Quill content
         if (quillRef.current) {
           quillRef.current.root.innerHTML = "";
         }
@@ -75,6 +74,10 @@ const AddJob = () => {
         setDescription(html);
       });
     }
+  }, []);
+
+  useEffect(() => {
+    document.title = "Superio - Job Portal | Dashboard";
   }, []);
 
   return (
@@ -150,6 +153,7 @@ const AddJob = () => {
               <option value="Mymensingh">Mymensingh</option>
               <option value="Rajshahi">Rajshahi</option>
               <option value="Sylhet">Sylhet</option>
+              <option value="Remote">Remote</option>
             </select>
           </div>
 
@@ -179,7 +183,7 @@ const AddJob = () => {
               placeholder="Enter salary range"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               value={salary}
-              onChange={(e) => setSalary(Number(e.target.value))}
+              onChange={(e) => setSalary(e.target.value)}
               required
             />
           </div>

@@ -18,7 +18,7 @@ const JobCard = ({ job }) => {
       className="flex gap-4 rounded-lg border border-gray-200 p-5 hover:shadow transition cursor-pointer"
     >
       <img
-        className="w-[60px] h-[60px] object-contain"
+        className="w-[50px] h-[50px] object-contain"
         src={job.companyId?.image || assets.company_icon}
         alt={`${job.companyId?.name || "Company"} Logo`}
       />

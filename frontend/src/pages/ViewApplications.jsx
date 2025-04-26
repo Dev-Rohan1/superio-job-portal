@@ -66,6 +66,10 @@ const ViewApplications = () => {
   };
 
   useEffect(() => {
+    document.title = "Superio - Job Portal | Dashboard";
+  }, []);
+
+  useEffect(() => {
     fetchViewApplicationsPageData();
   }, []);
 
