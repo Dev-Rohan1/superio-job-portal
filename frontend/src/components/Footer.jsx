@@ -15,7 +15,7 @@ const Footer = () => {
               alt="Company Logo"
             />
           </Link>
-          <span className="hidden sm:block text-gray-300 h-6 lg:flex items-center">
+          <span className="hidden sm:block text-gray-500 h-6 lg:flex items-center">
             |
           </span>
           <p className="text-gray-600 text-sm sm:text-base text-center sm:text-left">

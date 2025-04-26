@@ -2,6 +2,8 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { faqs } from "../assets/assets";
+import { motion } from "framer-motion";
+import { SlideLeft, SlideUp } from "../utils/Animation";
 
 const Terms = () => {
   return (
@@ -14,11 +16,13 @@ const Terms = () => {
             Terms and Conditions
           </h1>
         </div>
-
         {/* Terms Content */}
         <div>
           {faqs.map((faq) => (
-            <div
+            <motion.div
+              variants={SlideLeft(0.3)}
+              initial="hidden"
+              whileInView="visible"
               key={faq.id}
               className="border border-gray-200 rounded  hover:bg-gray-50 transition-colors duration-200 mb-5"
             >
@@ -34,12 +38,16 @@ const Terms = () => {
                   )}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
-
         {/* Additional Legal Notice */}
-        <div className="mt-12 bg-blue-50 rounded-lg p-6 border border-blue-100">
+        <motion.div
+          variants={SlideUp(0.3)}
+          initial="hidden"
+          whileInView="visible"
+          className="mt-12 bg-blue-50 rounded-lg p-6 border border-blue-100"
+        >
           <h3 className="text-lg font-medium text-blue-800 mb-3">
             Legal Notice
           </h3>
@@ -48,7 +56,7 @@ const Terms = () => {
             full. If you disagree with any part of these terms, please do not
             use our services.
           </p>
-        </div>
+        </motion.div>
       </section>
       <Footer />
     </>

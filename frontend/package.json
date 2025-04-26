@@ -12,6 +12,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.4",
     "axios": "^1.8.4",
+    "framer-motion": "^12.9.2",
     "k-convert": "^1.0.6",
     "lucide-react": "^0.488.0",
     "moment": "^2.30.1",

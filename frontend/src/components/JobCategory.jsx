@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { categoryIcon } from "../assets/assets";
+import { motion } from "framer-motion";
+import { SlideLeft, slideRigth } from "../utils/Animation";
 
 const JobCategory = () => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -29,7 +31,12 @@ const JobCategory = () => {
       </div>
 
       {/* Grid of Categories */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4 md:gap-6">
+      <motion.div
+        variants={SlideLeft(0.3)}
+        initial="hidden"
+        whileInView={"visible"}
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4 md:gap-6"
+      >
         {Array.isArray(categoryIcon) &&
           categoryIcon.map((icon, index) => {
             const isActive = activeIndex === index;
@@ -62,7 +69,7 @@ const JobCategory = () => {
               </div>
             );
           })}
-      </div>
+      </motion.div>
     </section>
   );
 };

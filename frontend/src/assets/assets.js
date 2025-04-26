@@ -185,7 +185,7 @@ export const testimonials = [
   {
     title: "A Game-Changer for Job Seekers",
     description:
-      "I've used many job portals before, but this one stands out with its simplicity and effectiveness. Found a great opportunity here!",
+      "I've used many job portals before, but this one stands out with its simplicity and effectiveness. Found a great opportunity !",
     image: "https://randomuser.me/api/portraits/men/75.jpg", // Kevin Brooks photo
     name: "Kevin Brooks",
     position: "Software Engineer",

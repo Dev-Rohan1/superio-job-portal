@@ -3,6 +3,9 @@ import { AppContext } from "../context/AppContext";
 import JobCard from "./JobCard";
 import { useNavigate } from "react-router-dom";
 import Loader from "./Loader";
+import { motion } from "framer-motion";
+import { SlideUp } from "../utils/Animation";
+
 const FeaturedJob = () => {
   const { jobs, jobLoading } = useContext(AppContext);
   const navigate = useNavigate();
@@ -25,14 +28,19 @@ const FeaturedJob = () => {
         <p className="text-center text-gray-500">No jobs found</p>
       ) : (
         <>
-          <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
+          <motion.div
+            variants={SlideUp(0.5)}
+            initial="hidden"
+            whileInView="visible"
+            className="grid gap-4 grid-cols-1 md:grid-cols-2"
+          >
             {[...jobs]
               .reverse()
               .slice(0, 6)
               .map((job, index) => (
                 <JobCard job={job} key={job.id || index} />
               ))}
-          </div>
+          </motion.div>
 
           <div className="text-center mt-12">
             <button

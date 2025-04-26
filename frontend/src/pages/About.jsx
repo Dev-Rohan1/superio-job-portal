@@ -4,6 +4,8 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Testimonials from "../components/Testimonials";
 import { assets } from "../assets/assets";
+import { motion } from "framer-motion";
+import { SlideLeft, SlideUp } from "../utils/Animation";
 
 const About = () => {
   return (
@@ -18,26 +20,30 @@ const About = () => {
             About Superio
           </h1>
           <div className="max-w-4xl text-center mx-auto space-y-6 text-gray-600">
-            <p className="leading-relaxed">
+            <motion.p
+              variants={SlideUp(0.3)}
+              initial="hidden"
+              whileInView="visible"
+              className="leading-relaxed"
+            >
               Far much that one rank beheld bluebird after outside ignobly
               allegedly more when oh arrogantly vehement irresistibly fussy
               penguin insect additionally wow absolutely crud meretriciously
               hastily dalmatian a glowered inset one echidna cassowary some
               parrot and much as goodness some froze the sullen much connected
-              bat wonderfully on instantaneously eel valiantly petted this along
-              across highhandedly much.
-            </p>
-            <p className="text-lg leading-relaxed">
+              bat.
+            </motion.p>
+            <motion.p
+              variants={SlideUp(0.5)}
+              initial="hidden"
+              whileInView="visible"
+              className="text-lg leading-relaxed"
+            >
               Repeatedly dreamed alas opossum but dramatically despite
               expeditiously that jeepers loosely yikes that as or eel underneath
               kept and slept compactly far purred sure abidingly up above
-              fitting to strident wiped set waywardly far the and pangolin horse
-              approving paid chuckled cassowary oh above a much opposite far
-              much hypnotically more therefore wasp less that hey apart well
-              like while superbly orca and far hence one.Far much that one rank
-              beheld bluebird after outside ignobly allegedly more when oh
-              arrogantly vehement irresistibly fussy.
-            </p>
+              fitting to strident wiped set waywardly.
+            </motion.p>
           </div>
         </div>
 
@@ -54,7 +60,12 @@ const About = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Work Step 1 */}
-            <div className="bg-white p-8 rounded-xl border border-gray-100 shadow-md hover:shadow-lg transition-shadow duration-300 text-center">
+            <motion.div
+              variants={SlideLeft(0.2)}
+              initial="hidden"
+              whileInView="visible"
+              className="bg-white p-8 rounded-xl border border-gray-100 shadow-md hover:shadow-lg transition-shadow duration-300 text-center"
+            >
               <div className="flex justify-center mb-6">
                 <img
                   src={assets.work_1}
@@ -69,10 +80,15 @@ const About = () => {
                 Employers on average spend 31 seconds scanning resumes to
                 identify potential matches.
               </p>
-            </div>
+            </motion.div>
 
             {/* Work Step 2 */}
-            <div className="bg-white p-8 border border-gray-100 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 text-center">
+            <motion.div
+              variants={SlideLeft(0.4)}
+              initial="hidden"
+              whileInView="visible"
+              className="bg-white p-8 rounded-xl border border-gray-100 shadow-md hover:shadow-lg transition-shadow duration-300 text-center"
+            >
               <div className="flex justify-center mb-6">
                 <img
                   src={assets.work_2}
@@ -84,13 +100,17 @@ const About = () => {
                 Job Fit Scoring
               </h3>
               <p className="text-gray-600">
-                Employers on average spend 31 seconds scanning resumes to
-                identify potential matches.
+                Our advanced algorithm scores your resume against job criteria.
               </p>
-            </div>
+            </motion.div>
 
             {/* Work Step 3 */}
-            <div className="bg-white p-8 border border-gray-100 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 text-center">
+            <motion.div
+              variants={SlideLeft(0.6)}
+              initial="hidden"
+              whileInView="visible"
+              className="bg-white p-8 rounded-xl border border-gray-100 shadow-md hover:shadow-lg transition-shadow duration-300 text-center"
+            >
               <div className="flex justify-center mb-6">
                 <img
                   src={assets.work_3}
@@ -102,10 +122,9 @@ const About = () => {
                 Help Every Step of the Way
               </h3>
               <p className="text-gray-600">
-                Employers on average spend 31 seconds scanning resumes to
-                identify potential matches.
+                Receive expert guidance throughout your job search journey.
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>

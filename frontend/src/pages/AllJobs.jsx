@@ -1,12 +1,14 @@
-import { ChevronLeft, ChevronRight, Filter, X } from "lucide-react";
-import React, { useContext, useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight, Filter } from "lucide-react";
+import React, { useContext, useEffect, useState, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { JobCategories, JobLocations } from "../assets/assets";
 import JobCard from "../components/JobCard";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { AppContext } from "../context/AppContext";
-import Loader from "../components/Loader"; // ✅
+import Loader from "../components/Loader";
+import { motion } from "framer-motion";
+import { slideRigth, SlideUp } from "../utils/Animation";
 
 function AllJobs() {
   const [jobData, setJobData] = useState([]);
@@ -36,19 +38,17 @@ function AllJobs() {
     selectedLocations: [],
   });
 
-  // Fetch jobs on component mount
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true); // ✅ Start loader
+      setLoading(true);
       await fetchJobsData();
-      setLoading(false); // ✅ End loader
+      setLoading(false);
     };
     fetchData();
   }, []);
 
-  // Update jobs when category or jobs change
   useEffect(() => {
-    if (!jobs || jobs.length === 0) return;
+    if (!jobs?.length) return;
 
     let filtered = [...jobs];
 
@@ -59,7 +59,6 @@ function AllJobs() {
     }
 
     setJobData(filtered);
-
     setSearchInput({
       title: isSearched ? searchFilter.title : "",
       location: isSearched ? searchFilter.location : "",
@@ -70,19 +69,20 @@ function AllJobs() {
     setCurrentPage(1);
   }, [category, jobs, isSearched, searchFilter]);
 
-  // Filter jobs on searchInput change
   useEffect(() => {
     let results = [...jobData];
 
-    if (searchInput.title) {
+    if (searchInput.title.trim()) {
       results = results.filter((job) =>
-        job.title.toLowerCase().includes(searchInput.title.toLowerCase())
+        job.title.toLowerCase().includes(searchInput.title.trim().toLowerCase())
       );
     }
 
-    if (searchInput.location) {
+    if (searchInput.location.trim()) {
       results = results.filter((job) =>
-        job.location.toLowerCase().includes(searchInput.location.toLowerCase())
+        job.location
+          .toLowerCase()
+          .includes(searchInput.location.trim().toLowerCase())
       );
     }
 
@@ -104,26 +104,23 @@ function AllJobs() {
 
   const handleSearchChange = (e) => {
     const { name, value } = e.target;
-    setSearchInput((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setSearchInput((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleCategoryToggle = (category) => {
+  const handleCategoryToggle = (cat) => {
     setSearchInput((prev) => {
-      const updated = prev.selectedCategories.includes(category)
-        ? prev.selectedCategories.filter((c) => c !== category)
-        : [...prev.selectedCategories, category];
+      const updated = prev.selectedCategories.includes(cat)
+        ? prev.selectedCategories.filter((c) => c !== cat)
+        : [...prev.selectedCategories, cat];
       return { ...prev, selectedCategories: updated };
     });
   };
 
-  const handleLocationToggle = (location) => {
+  const handleLocationToggle = (loc) => {
     setSearchInput((prev) => {
-      const updated = prev.selectedLocations.includes(location)
-        ? prev.selectedLocations.filter((l) => l !== location)
-        : [...prev.selectedLocations, location];
+      const updated = prev.selectedLocations.includes(loc)
+        ? prev.selectedLocations.filter((l) => l !== loc)
+        : [...prev.selectedLocations, loc];
       return { ...prev, selectedLocations: updated };
     });
   };
@@ -141,12 +138,13 @@ function AllJobs() {
   };
 
   const totalPages = Math.ceil(filteredJobs.length / jobsPerPage);
-  const paginatedJobs = filteredJobs
-    .slice()
-    .reverse()
-    .slice((currentPage - 1) * jobsPerPage, currentPage * jobsPerPage);
 
-  // ✅ Show loader if still loading
+  const paginatedJobs = useMemo(() => {
+    return [...filteredJobs]
+      .reverse()
+      .slice((currentPage - 1) * jobsPerPage, currentPage * jobsPerPage);
+  }, [filteredJobs, currentPage]);
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -154,11 +152,11 @@ function AllJobs() {
       </div>
     );
   }
+
   return (
     <>
       <Navbar />
       <section>
-        {/* Filter toggle button (mobile) */}
         <div className="md:hidden flex justify-end mb-4">
           <button
             onClick={() => setShowFilters(!showFilters)}
@@ -169,45 +167,49 @@ function AllJobs() {
           </button>
         </div>
 
-        <div className="flex flex-col md:flex-row md:gap-8 lg:gap-16">
-          {/* Filter Panel */}
+        <motion.div
+          variants={slideRigth(0.5)}
+          initial="hidden"
+          animate="visible"
+          className="flex flex-col md:flex-row md:gap-8 lg:gap-16"
+        >
+          {/* Filters */}
           <div
-            className={`lg:w-1/4 p-4 rounded-lg  border border-gray-200 ${
+            className={`lg:w-1/4 p-4 rounded-lg border border-gray-200 ${
               showFilters ? "block" : "hidden md:block"
             }`}
           >
             <div className="space-y-6">
-              {/* Filters */}
               <div>
-                <h2 className="text-lg font-semibold text-gray-800 mb-3">
+                <h2 className="text-lg font-semibold text-gray-800 mb-2">
                   Job Title
                 </h2>
                 <input
                   type="text"
                   name="title"
-                  placeholder="Title"
                   value={searchInput.title}
                   onChange={handleSearchChange}
+                  placeholder="Enter title"
                   className="w-full border border-gray-300 rounded-md px-4 py-2"
                 />
               </div>
 
               <div>
-                <h2 className="text-lg font-semibold text-gray-800 mb-3">
+                <h2 className="text-lg font-semibold text-gray-800 mb-2">
                   Job Location
                 </h2>
                 <input
                   type="text"
                   name="location"
-                  placeholder="Location"
                   value={searchInput.location}
                   onChange={handleSearchChange}
+                  placeholder="Enter location"
                   className="w-full border border-gray-300 rounded-md px-4 py-2"
                 />
               </div>
 
               <div>
-                <h2 className="text-lg font-semibold text-gray-800 mb-3">
+                <h2 className="text-lg font-semibold text-gray-800 mb-2">
                   Categories
                 </h2>
                 <ul className="space-y-2">
@@ -215,13 +217,13 @@ function AllJobs() {
                     <li key={i} className="flex items-center">
                       <input
                         type="checkbox"
-                        id={`category-${i}`}
+                        id={`cat-${i}`}
                         checked={searchInput.selectedCategories.includes(cat)}
                         onChange={() => handleCategoryToggle(cat)}
                         className="h-4 w-4"
                       />
                       <label
-                        htmlFor={`category-${i}`}
+                        htmlFor={`cat-${i}`}
                         className="ml-2 text-gray-700"
                       >
                         {cat}
@@ -232,7 +234,7 @@ function AllJobs() {
               </div>
 
               <div>
-                <h2 className="text-lg font-semibold text-gray-800 mb-3">
+                <h2 className="text-lg font-semibold text-gray-800 mb-2">
                   Locations
                 </h2>
                 <ul className="space-y-2">
@@ -240,13 +242,13 @@ function AllJobs() {
                     <li key={i} className="flex items-center">
                       <input
                         type="checkbox"
-                        id={`location-${i}`}
+                        id={`loc-${i}`}
                         checked={searchInput.selectedLocations.includes(loc)}
                         onChange={() => handleLocationToggle(loc)}
                         className="h-4 w-4"
                       />
                       <label
-                        htmlFor={`location-${i}`}
+                        htmlFor={`loc-${i}`}
                         className="ml-2 text-gray-700"
                       >
                         {loc}
@@ -258,10 +260,10 @@ function AllJobs() {
             </div>
           </div>
 
-          {/* Job List */}
+          {/* Job Cards */}
           <div className="lg:w-3/4">
             <div className="mb-6">
-              <h1 className="text-2xl font-bold text-gray-700 mb-2 capitalize">
+              <h1 className="text-2xl font-bold text-gray-700 capitalize mb-2">
                 {category === "all"
                   ? "Latest All Jobs"
                   : `Jobs in ${
@@ -279,11 +281,14 @@ function AllJobs() {
               </p>
             </div>
 
-            <div className="space-y-4">
+            <motion.div
+              variants={SlideUp(0.5)}
+              initial="hidden"
+              animate="visible"
+              className="space-y-4"
+            >
               {paginatedJobs.length > 0 ? (
-                paginatedJobs.map((job, index) => (
-                  <JobCard key={index} job={job} />
-                ))
+                paginatedJobs.map((job, i) => <JobCard key={i} job={job} />)
               ) : (
                 <div className="text-center bg-white p-6 border border-gray-200 rounded-md">
                   <h3 className="text-lg font-semibold text-gray-800 mb-1">
@@ -294,13 +299,13 @@ function AllJobs() {
                   </p>
                   <button
                     onClick={clearAllFilters}
-                    className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 cursor-pointer"
+                    className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
                   >
                     Clear All Filters
                   </button>
                 </div>
               )}
-            </div>
+            </motion.div>
 
             {totalPages > 1 && (
               <div className="flex justify-center items-center gap-2 mt-8 flex-wrap">
@@ -309,7 +314,7 @@ function AllJobs() {
                     setCurrentPage((prev) => Math.max(prev - 1, 1))
                   }
                   disabled={currentPage === 1}
-                  className="p-2 border border-gray-300 rounded-md hover:bg-gray-100 disabled:opacity-50 text-gray-700 cursor-pointer"
+                  className="p-2 border border-gray-300 rounded-md hover:bg-gray-100 disabled:opacity-50 text-gray-700"
                 >
                   <ChevronLeft size={20} />
                 </button>
@@ -333,14 +338,14 @@ function AllJobs() {
                     setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                   }
                   disabled={currentPage === totalPages}
-                  className="p-2 border border-gray-300 rounded-md hover:bg-gray-100 disabled:opacity-50 text-gray-700 cursor-pointer"
+                  className="p-2 border border-gray-300 rounded-md hover:bg-gray-100 disabled:opacity-50 text-gray-700"
                 >
                   <ChevronRight size={20} />
                 </button>
               </div>
             )}
           </div>
-        </div>
+        </motion.div>
       </section>
       <Footer />
     </>
