@@ -11,12 +11,11 @@ import upload from "../utils/upload.js";
 import userAuthMiddleware from "../middlewares/userAuthMiddleware.js";
 
 const router = express.Router();
-
 router.post("/register-user", upload.single("image"), registerUser);
-router.post("/login-user", upload.single("image"), loginUser);
+router.post("/login-user", loginUser);
 router.get("/user-data", userAuthMiddleware, fetchUserData);
 router.post("/apply-job", userAuthMiddleware, applyJob);
-router.post("/get-user-applications", userAuthMiddleware, getUserAppliedJobs);
+router.get("/user-applications", userAuthMiddleware, getUserAppliedJobs);
 router.post(
   "/upload-resume",
   userAuthMiddleware,
