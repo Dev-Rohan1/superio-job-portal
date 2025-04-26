@@ -1,9 +1,14 @@
+import { useContext, useEffect } from "react";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
-import { useEffect } from "react";
+import { AppContext } from "../context/AppContext";
+import { LoaderCircle, LogOut } from "lucide-react";
+import toast from "react-hot-toast";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+
+  const { companyData, companyLoading } = useContext(AppContext);
 
   const sidebarLinks = [
     {
@@ -27,7 +32,9 @@ const Dashboard = () => {
   ];
 
   const handleLogout = () => {
-    navigate("/login");
+    localStorage.removeItem("companyToken");
+    toast.success("Logout successfully");
+    navigate("/recruiter-login");
   };
 
   useEffect(() => {
@@ -42,23 +49,28 @@ const Dashboard = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <header className="flex items-center justify-between border-b border-gray-200 py-3 bg-white sticky top-0 z-10">
-        <Link to="/" className="flex items-center">
-          <img
-            className="w-[120px] md:w-[140px]"
-            src={assets.logo}
-            alt="Lecruiter Logo"
-          />
+        <Link to="/dashboard" className="flex items-center">
+          <img className="w-[120px]" src={assets.logo} alt="Lecruiter Logo" />
         </Link>
-        <div className="flex items-center gap-4 md:gap-5">
-          <p className="text-gray-600">Hi! Admin</p>
-          <button
-            className="border border-gray-300 rounded-full text-sm px-4 py-1 hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            onClick={handleLogout}
-            aria-label="Logout"
-          >
-            Logout
-          </button>
-        </div>
+        {companyLoading ? (
+          <LoaderCircle />
+        ) : companyData ? (
+          <div className="flex items-center gap-4 md:gap-3">
+            <div className="flex items-center gap-2">
+              <p className="text-gray-600">Hi, {companyData?.name}</p>
+              <img className="w-8 h-8" src={companyData?.image} alt="image" />
+            </div>
+            <button
+              className="w-[30px] h-[30px] flex items-center justify-center rounded bg-gray-50 border border-gray-200 hover:bg-gray-100 transition-colors cursor-pointer"
+              onClick={handleLogout}
+              aria-label="Logout"
+            >
+              <LogOut size={18} className="text-gray-700" />
+            </button>
+          </div>
+        ) : (
+          <></>
+        )}
       </header>
 
       <div className="flex flex-1">

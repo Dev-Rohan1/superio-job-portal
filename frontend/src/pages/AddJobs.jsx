@@ -1,7 +1,10 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import Quill from "quill"; // ✅ Fix import capitalization
+import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import { AppContext } from "../context/AppContext";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { LoaderCircle } from "lucide-react";
 
 const AddJob = () => {
   const editorRef = useRef(null);
@@ -12,9 +15,54 @@ const AddJob = () => {
   const [category, setCategory] = useState("Programming");
   const [location, setLocation] = useState("Dhaka");
   const [level, setLevel] = useState("Intermediate");
-  const [salary, setSalary] = useState(0);
+  const [salary, setSalary] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  // ✅ Initialize Quill Editor
+  const { backendUrl, companyToken } = useContext(AppContext);
+
+  const postJob = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const { data } = await axios.post(
+        `${backendUrl}/company/post-job`,
+        {
+          title,
+          description,
+          category,
+          location,
+          level,
+          salary: Number(salary), // Ensure salary is a number
+        },
+        {
+          headers: { token: companyToken },
+        }
+      );
+
+      if (data.success) {
+        toast.success(data.message);
+        setTitle("");
+        setDescription("");
+        setCategory("Programming");
+        setLocation("Dhaka");
+        setLevel("Intermediate");
+        setSalary(null);
+
+        // Reset Quill content
+        if (quillRef.current) {
+          quillRef.current.root.innerHTML = "";
+        }
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (!quillRef.current && editorRef.current) {
       quillRef.current = new Quill(editorRef.current, {
@@ -29,11 +77,9 @@ const AddJob = () => {
     }
   }, []);
 
-  // ✅ Submit handler only on form submit
-
   return (
-    <section className="mr-1">
-      <form>
+    <section className="mr-1 mb-6">
+      <form onSubmit={postJob}>
         {/* Job Title */}
         <div className="mb-6">
           <label className="block text-gray-800 text-lg font-semibold mb-3 pb-1 border-b border-gray-200">
@@ -54,7 +100,15 @@ const AddJob = () => {
           <label className="block text-gray-800 text-lg font-semibold mb-3 pb-1 border-b border-gray-200">
             Job Description
           </label>
-          <div ref={editorRef} style={{ minHeight: "150px" }} />
+          <div
+            ref={editorRef}
+            style={{
+              minHeight: "150px",
+              border: "1px solid #ccc",
+              borderRadius: "8px",
+              padding: "10px",
+            }}
+          />
         </div>
 
         {/* Form Grid */}
@@ -125,7 +179,7 @@ const AddJob = () => {
               placeholder="Enter salary range"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               value={salary}
-              onChange={(e) => setSalary(e.target.value)}
+              onChange={(e) => setSalary(Number(e.target.value))}
               required
             />
           </div>
@@ -134,9 +188,16 @@ const AddJob = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors shadow-md"
+          disabled={loading}
+          className={`w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white py-2.5 px-8 font-semibold rounded ${
+            loading ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+          }`}
         >
-          Add Job
+          {loading ? (
+            <LoaderCircle className="animate-spin h-5 w-5 mx-auto" />
+          ) : (
+            "Add Job"
+          )}
         </button>
       </form>
     </section>

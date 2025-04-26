@@ -44,10 +44,10 @@ const Hero = () => {
         {/* Search Form */}
         <form
           onSubmit={searchHandler}
-          className="bg-white rounded-lg shadow-md p-4 flex flex-col sm:flex-row gap-4 sm:gap-2 items-stretch sm:items-center w-full"
+          className="bg-white rounded-lg shadow p-3 flex flex-col sm:flex-row gap-4 sm:gap-2 items-stretch sm:items-center w-full"
         >
           {/* Job Title Input */}
-          <div className="flex items-center border border-gray-300 rounded-md px-3 py-2 md:py-3 bg-white w-full">
+          <div className="flex items-center border border-gray-300 rounded-md px-3 py-2 md:py-2.5 bg-white w-full">
             <Search className="text-gray-400 mr-2 shrink-0" />
             <input
               type="text"
@@ -61,7 +61,7 @@ const Hero = () => {
           </div>
 
           {/* Location Input */}
-          <div className="flex items-center border border-gray-300 rounded-md px-3 py-2 md:py-3 bg-white w-full">
+          <div className="flex items-center border border-gray-300 rounded-md px-3 py-2 md:py-2.5 bg-white w-full">
             <MapPin className="text-gray-400 mr-2 shrink-0" />
             <input
               type="text"
@@ -77,7 +77,7 @@ const Hero = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full sm:w-auto bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2.5 md:py-3.5 px-6 rounded-md transition text-sm cursor-pointer"
+            className="w-full sm:w-auto bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2.5 md:py-3 px-6 rounded-md transition text-sm cursor-pointer"
           >
             Search
           </button>

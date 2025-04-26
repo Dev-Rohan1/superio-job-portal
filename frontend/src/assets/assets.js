@@ -45,8 +45,10 @@ import designing from "./web-design.png";
 import work_1 from "./work-1.webp";
 import work_2 from "./work-2.webp";
 import work_3 from "./work-3.webp";
+import upload_resume from "./upload-file.png";
 
 export const assets = {
+  upload_resume,
   logo,
   search_icon,
   cross_icon,

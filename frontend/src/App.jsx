@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import AppLayout from "./layout/AppLayout";
 import About from "./pages/About";
@@ -15,8 +15,11 @@ import Dashborad from "./pages/Dashborad";
 import AddJobs from "./pages/AddJobs";
 import ManageJobs from "./pages/ManageJobs";
 import ViewApplications from "./pages/ViewApplications";
+import { AppContext } from "./context/AppContext";
 
 const App = () => {
+  const { companyToken } = useContext(AppContext);
+
   return (
     <AppLayout>
       <Routes>
@@ -29,7 +32,7 @@ const App = () => {
         <Route path="/candidate-login" element={<CandidatesLogin />} />
         <Route path="/candidate-signup" element={<CandidatesSignup />} />
         <Route path="/recruiter-login" element={<RecruiterLogin />} />
-        <Route path="/recruiter-signup" element={<RecruiterSignup />} />
+        <Route path="/recruiter-signup" element={<RecruiterSignup />} />]
         <Route path="/dashboard" element={<Dashborad />}>
           <Route path="add-job" element={<AddJobs />} />
           <Route path="manage-jobs" element={<ManageJobs />} />
