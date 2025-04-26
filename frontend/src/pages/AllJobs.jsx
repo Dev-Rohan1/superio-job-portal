@@ -1,20 +1,33 @@
 import { ChevronLeft, ChevronRight, Filter, X } from "lucide-react";
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { JobCategories, JobLocations } from "../assets/assets";
 import JobCard from "../components/JobCard";
 import Navbar from "../components/Navbar";
-import { AppContext } from "../context/AppContext";
 import Footer from "../components/Footer";
+import { AppContext } from "../context/AppContext";
+import Loader from "../components/Loader"; // ✅
 
 function AllJobs() {
   const [jobData, setJobData] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
-  const { jobs, searchFilter, setSearchFilter, setIsSearched, isSearched } =
-    useContext(AppContext);
-  const { category } = useParams();
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [showFilters, setShowFilters] = useState(false);
+
+  const {
+    jobs,
+    searchFilter,
+    setSearchFilter,
+    setIsSearched,
+    isSearched,
+    fetchJobsData,
+  } = useContext(AppContext);
+
+  const { category } = useParams();
+  const navigate = useNavigate();
+
+  const jobsPerPage = 6;
 
   const [searchInput, setSearchInput] = useState({
     title: "",
@@ -23,43 +36,41 @@ function AllJobs() {
     selectedLocations: [],
   });
 
-  const jobsPerPage = 6;
+  // Fetch jobs on component mount
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true); // ✅ Start loader
+      await fetchJobsData();
+      setLoading(false); // ✅ End loader
+    };
+    fetchData();
+  }, []);
 
-  // Set initial data when category changes
+  // Update jobs when category or jobs change
   useEffect(() => {
     if (!jobs || jobs.length === 0) return;
 
-    let filteredData = [...jobs];
+    let filtered = [...jobs];
 
     if (category !== "all") {
-      filteredData = filteredData.filter(
+      filtered = filtered.filter(
         (job) => job.category.toLowerCase() === category.toLowerCase()
       );
     }
 
-    setJobData(filteredData);
+    setJobData(filtered);
 
-    // Apply initial search filter from context
-    if (isSearched) {
-      setSearchInput({
-        title: searchFilter.title || "",
-        location: searchFilter.location || "",
-        selectedCategories: [],
-        selectedLocations: [],
-      });
-    } else {
-      setSearchInput({
-        title: "",
-        location: "",
-        selectedCategories: [],
-        selectedLocations: [],
-      });
-    }
+    setSearchInput({
+      title: isSearched ? searchFilter.title : "",
+      location: isSearched ? searchFilter.location : "",
+      selectedCategories: [],
+      selectedLocations: [],
+    });
 
     setCurrentPage(1);
   }, [category, jobs, isSearched, searchFilter]);
 
-  // Apply filtering logic
+  // Filter jobs on searchInput change
   useEffect(() => {
     let results = [...jobData];
 
@@ -101,25 +112,19 @@ function AllJobs() {
 
   const handleCategoryToggle = (category) => {
     setSearchInput((prev) => {
-      const newCategories = prev.selectedCategories.includes(category)
+      const updated = prev.selectedCategories.includes(category)
         ? prev.selectedCategories.filter((c) => c !== category)
         : [...prev.selectedCategories, category];
-      return {
-        ...prev,
-        selectedCategories: newCategories,
-      };
+      return { ...prev, selectedCategories: updated };
     });
   };
 
   const handleLocationToggle = (location) => {
     setSearchInput((prev) => {
-      const newLocations = prev.selectedLocations.includes(location)
+      const updated = prev.selectedLocations.includes(location)
         ? prev.selectedLocations.filter((l) => l !== location)
         : [...prev.selectedLocations, location];
-      return {
-        ...prev,
-        selectedLocations: newLocations,
-      };
+      return { ...prev, selectedLocations: updated };
     });
   };
 
@@ -130,18 +135,25 @@ function AllJobs() {
       selectedCategories: [],
       selectedLocations: [],
     });
-    setSearchFilter({
-      title: "",
-      location: "",
-    });
+    setSearchFilter({ title: "", location: "" });
     setIsSearched(false);
+    navigate("/all-jobs/all");
   };
 
   const totalPages = Math.ceil(filteredJobs.length / jobsPerPage);
   const paginatedJobs = filteredJobs
+    .slice()
     .reverse()
     .slice((currentPage - 1) * jobsPerPage, currentPage * jobsPerPage);
 
+  // ✅ Show loader if still loading
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader />
+      </div>
+    );
+  }
   return (
     <>
       <Navbar />

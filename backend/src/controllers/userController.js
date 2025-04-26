@@ -184,7 +184,7 @@ export const getUserAppliedJobs = async (req, res) => {
 
     const application = await JobApplication.find({ userId })
       .populate("companyId", "name email image")
-      .populate("jobId", "title description location level salary category");
+      .populate("jobId", "title location date status");
 
     return res.status(200).json({
       success: true,

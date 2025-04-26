@@ -203,13 +203,14 @@ export const JobCategories = [
 ];
 
 export const JobLocations = [
-  "Bangalore",
-  "Washington",
-  "Hyderabad",
-  "Mumbai",
-  "California",
-  "Chennai",
-  "New York",
+  "Dhaka",
+  "Chattogram",
+  "Khulna",
+  "Rajshahi",
+  "Barishal",
+  "Sylhet",
+  "Rangpur",
+  "Mymensingh",
 ];
 
 // Sample data for Manage Jobs Page

@@ -101,7 +101,7 @@ const Dashboard = () => {
           </nav>
         </aside>
 
-        <main className="flex-1 overflow-auto pl-4 pt-4">
+        <main className="flex-1  overflow-auto pl-4 pt-4">
           <Outlet />
         </main>
       </div>

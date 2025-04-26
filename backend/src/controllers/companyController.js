@@ -249,13 +249,13 @@ export const changeJobVisibility = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: "Job visibility changed successfully",
+      message: "Visibility changed",
     });
   } catch (error) {
     console.error("Error changing job visibility:", error);
     return res.status(500).json({
       success: false,
-      message: "Job visibility change failed",
+      message: "Visibility change failed",
     });
   }
 };
@@ -266,12 +266,12 @@ export const getCompanyJobApplicants = async (req, res) => {
 
     const applicants = await JobApplication.find({ companyId })
       .populate("userId", "name image resume")
-      .populate("jobId", "title location Date saDateary");
+      .populate("jobId", "title location date status");
 
     return res.status(200).json({
       success: true,
       message: "Applicants fetched successfully",
-      applicants,
+      viewApplicationData: applicants,
     });
   } catch (error) {
     console.log(error);

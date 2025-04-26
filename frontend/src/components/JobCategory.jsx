@@ -11,6 +11,7 @@ const JobCategory = () => {
       setActiveIndex(index);
       setTimeout(() => setActiveIndex(null), 150);
       navigate(`/all-jobs/${encodeURIComponent(name)}`);
+      window.scrollTo(0, 0);
     },
     [navigate]
   );
@@ -39,10 +40,10 @@ const JobCategory = () => {
                 onKeyDown={(e) => {
                   if (e.key === "Enter") handleClick(index, icon.name);
                 }}
-                tabIndex="0"
+                tabIndex={0}
                 role="button"
                 aria-pressed={isActive}
-                className={`relative group bg-white p-4 md:p-6 rounded-lg md:rounded-xl border border-gray-100 hover:border-gray-200 shadow-sm hover:shadow-md cursor-pointer transition-all duration-200 flex flex-col items-center text-center ${
+                className={`relative group bg-white p-4 md:p-6 rounded-lg md:rounded-md border border-gray-100 hover:border-gray-200 shadow hover:shadow-md cursor-pointer transition-all duration-200 flex flex-col items-center text-center ${
                   isActive ? "scale-[0.98] bg-blue-50 border-blue-200" : ""
                 }`}
               >
@@ -51,6 +52,7 @@ const JobCategory = () => {
                     className="w-7 h-7 md:w-8 md:h-8"
                     src={icon.icon}
                     alt={icon.name}
+                    title={icon.name}
                     loading="lazy"
                   />
                 </div>

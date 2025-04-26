@@ -19,7 +19,7 @@ const JobCard = ({ job }) => {
     >
       <img
         className="w-[60px] h-[60px] object-contain"
-        src={job.companyId?.logo || assets.company_icon}
+        src={job.companyId?.image || assets.company_icon}
         alt={`${job.companyId?.name || "Company"} Logo`}
       />
       <div className="flex-1">

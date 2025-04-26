@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext";
 
@@ -22,6 +22,8 @@ const Navbar = () => {
   const { isLogin, userData, userDataLoading, fetchUserData, setIsLogin } =
     useContext(AppContext);
   const location = useLocation();
+
+  const navigate = useNavigate();
 
   const menu = [
     { name: "Home", path: "/" },
@@ -68,7 +70,7 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("userToken");
     toast.success("Logout successfully");
-    // fetchUserData();
+    navigate("/candidate-login");
     setIsLogin(false);
   };
   useEffect(() => {
@@ -140,26 +142,13 @@ const Navbar = () => {
                 <div className="absolute right-0 top-12 mt-2 w-56 origin-top-right rounded-md border border-gray-200 bg-white z-50 overflow-hidden">
                   <div>
                     <Link
-                      to="/profile"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 gap-2"
-                    >
-                      <UserRound size={16} />
-                      Profile
-                    </Link>
-                    <Link
-                      to="/applied-jobs"
+                      to="/applications"
                       className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 gap-2"
                     >
                       <Briefcase size={16} />
                       Applied Jobs
                     </Link>
-                    <Link
-                      to="/upload-resume"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 gap-2"
-                    >
-                      <Upload size={16} />
-                      Upload Resume
-                    </Link>
+
                     <button
                       className="w-full text-left flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 gap-2"
                       onClick={handleLogout}
@@ -266,32 +255,12 @@ const Navbar = () => {
                 <ul className="space-y-1">
                   <li>
                     <Link
-                      to="/profile"
-                      onClick={toggleMenu}
-                      className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100"
-                    >
-                      <UserRound size={16} />
-                      Profile
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
                       to="/applied-jobs"
                       onClick={toggleMenu}
                       className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100"
                     >
                       <Briefcase size={16} />
                       Applied Jobs
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/upload-resume"
-                      onClick={toggleMenu}
-                      className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100"
-                    >
-                      <Upload size={16} />
-                      Upload Resume
                     </Link>
                   </li>
                   <li>
